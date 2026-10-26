@@ -10,7 +10,7 @@ function Cart(props) {
         setProducts(props.cart.products)
     }, [])
 
-    function onQuatityChanged(ev) {
+    function onQuantityChanged(ev) {
         for (const product of props.cart.products) {
             if (product.code === ev.product.code) {
                 product.qty = ev.newQty
@@ -23,7 +23,7 @@ function Cart(props) {
     return (
         <div>
             <hr />
-            <ItemsList products={products} onQuatityChanged={onQuatityChanged} />
+            <ItemsList products={products} onQuatityChanged={onQuantityChanged} />
             <hr />
             <Summary products={products} />
         </div>
