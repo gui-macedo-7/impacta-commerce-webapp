@@ -1,8 +1,8 @@
 import Item from './Item'
 
 function ItemsList(props) {
-    function onQuatityChanged(ev) {
-        props.onQuatityChanged(ev)
+    function onQuantityChanged(ev) {
+        props.onQuantityChanged(ev)
     }
 
     let rows = []
@@ -12,7 +12,7 @@ function ItemsList(props) {
             <Item
                 key={index}
                 product={product}
-                onQuatityChanged={onQuatityChanged}
+                onQuantityChanged={onQuantityChanged}
                 />
         )
     })

@@ -1,17 +1,26 @@
-import React, { useState } from 'react'
+import { useRouter } from 'next/router';
 
-export default function Home() {
-  const [count, setCount] = useState(0)
+import Layout from '../components/Layout';
+import Cart from '../components/ShoppingCart/Cart';
+import { closeOrder } from '../libs/api';
+const FIXED_CART_CODE = 'fixed-cart-code';
 
-  function increment() {
-    setCount(count + 1)
+export default function ShoppingCartPage() {
+  const router = useRouter();
+
+  function close() {
+    closeOrder(FIXED_CART_CODE);
+    router.push('/orders');
   }
-
   return (
-    <div>
-      <p>O valor do contador é: {count}</p>
-      <button onClick={increment}>Incrementar</button>
-    </div>
-  )
+    <Layout>
+      <h1 className='text-center mt-5'>Carrinho de Compras</h1>
 
+      <Cart />
+
+      <button onClick={close} className='btn btn-primary'>
+        Fechar pedido
+      </button>
+    </Layout>
+  );
 }

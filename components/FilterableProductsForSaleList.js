@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link"
-import { queryProducts } from "../api/api"
+import { queryProducts } from "../libs/api"
+import { currency } from '../libs/formatters'
 
 function Installment(props) {
     const fees = props.installment.hasFee ? "com juros" : "sem juros"
@@ -19,13 +20,11 @@ function ProductListItem(props) {
         <div className="d-flex position-relative border my-2">
             <img src={defaultProductImage} className="flex-shrink-0 me-3" />
             <div>
-                <Link href={`/products/${props.product.code}`}>
-                    <a className="stretched-link">
-                        <h3 className="mt-0">{props.product.title}</h3>
-                    </a>
+                <Link href={`/products/${props.product.code}`} className="stretched-link">
+                    <h3 className="mt-0">{props.product.title}</h3>
                 </Link>
-                <h4>R$ {props.product.amount}</h4>
-                <Installment installment={props.product.installment} />
+                <h4>{currency(props.product.amount)}</h4>
+                <Installment installment={props.product.installments} />
             </div>
         </div>
     )
@@ -110,8 +109,8 @@ function FilterableProductsForSaleList() {
 
     return (
         <>
-        <SearchBar onSearch={handleOnSearch} />
-        <div>{result}</div>
+            <SearchBar onSearch={handleOnSearch} />
+            <div>{result}</div>
         </>
     )
 }
